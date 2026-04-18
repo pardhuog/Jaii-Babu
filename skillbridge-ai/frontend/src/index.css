@@ -1,0 +1,326 @@
+/* ── Google Fonts — must be first ───────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Google+Sans:wght@400;500;700&display=swap');
+
+:root {
+  --font-display: 'Google Sans', 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: #F8F9FA;
+    color: #202124;
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 { font-family: var(--font-display); }
+
+  /* Google-style scrollbar */
+  ::-webkit-scrollbar       { width: 6px; }
+  ::-webkit-scrollbar-track { background: #F1F3F4; }
+  ::-webkit-scrollbar-thumb { background: #DADCE0; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #1A73E8; }
+
+  ::selection { background: rgba(26,115,232,0.15); color: #1A73E8; }
+}
+
+/* ── Hero animated gradient ──────────────────────────────── */
+.hero-gradient-bg {
+  background: linear-gradient(-45deg, #1A73E8, #00897B, #7C4DFF, #4285F4, #00ACC1);
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── Component Layer ─────────────────────────────────────── */
+@layer components {
+
+  /* ── Buttons ── */
+  .btn-primary {
+    @apply bg-g-blue-500 text-white font-medium px-6 py-2.5 rounded-full
+           hover:bg-g-blue-600 active:scale-95 transition-all duration-200
+           shadow-sm hover:shadow-blue-glow cursor-pointer
+           relative overflow-hidden select-none;
+  }
+  /* Material ripple */
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.25);
+    border-radius: 9999px;
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+  }
+  .btn-primary:active::after { transform: scale(2.5); opacity: 1; transition: none; }
+
+  .btn-secondary {
+    @apply bg-g-surface border border-g-border text-g-text-2 font-medium px-5 py-2.5
+           rounded-full hover:border-g-blue-500 hover:text-g-blue-500 hover:bg-g-blue-50
+           transition-all duration-200 cursor-pointer shadow-google;
+  }
+
+  .btn-ghost {
+    @apply text-g-text-2 hover:text-g-blue-500 hover:bg-g-blue-50 px-4 py-2
+           rounded-full transition-all duration-200 cursor-pointer font-medium;
+  }
+
+  .btn-teal {
+    @apply bg-g-teal-500 text-white font-medium px-6 py-2.5 rounded-full
+           hover:bg-g-teal-600 active:scale-95 transition-all duration-200
+           shadow-sm hover:shadow-teal-glow cursor-pointer;
+  }
+
+  /* ── Cards ── */
+  .card {
+    @apply bg-g-card border border-g-border rounded-2xl p-6
+           shadow-google hover:shadow-google-md
+           transition-all duration-200;
+  }
+
+  .card-hover {
+    @apply card hover:-translate-y-0.5 cursor-pointer;
+  }
+
+  .card-blue {
+    @apply bg-g-blue-50 border border-g-blue-100 rounded-2xl p-6;
+  }
+
+  .card-teal {
+    @apply bg-g-teal-50 border border-g-teal-100 rounded-2xl p-6;
+  }
+
+  /* ── Inputs ── */
+  .input-field {
+    @apply w-full bg-g-surface border border-g-border rounded-xl px-4 py-3
+           text-g-text placeholder-g-text-3
+           focus:outline-none focus:border-g-blue-500 focus:ring-2 focus:ring-g-blue-500/20
+           transition-all duration-200 text-sm;
+  }
+
+  .label {
+    @apply text-sm font-medium text-g-text-2 mb-1.5 block;
+  }
+
+  /* ── Badges ── */
+  .badge       { @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium; }
+  .badge-blue  { @apply badge bg-g-blue-50 text-g-blue-500 border border-g-blue-100; }
+  .badge-teal  { @apply badge bg-g-teal-50 text-g-teal-500 border border-g-teal-100; }
+  .badge-violet{ @apply badge bg-g-violet-50 text-g-violet-500 border border-g-violet-100; }
+  .badge-green { @apply badge bg-green-50 text-g-green-500 border border-green-100; }
+  .badge-red   { @apply badge bg-red-50 text-g-red-500 border border-red-100; }
+  .badge-yellow{ @apply badge bg-yellow-50 text-g-yellow-600 border border-yellow-100; }
+
+  /* Backward compat aliases */
+  .badge-violet-dark { @apply badge-violet; }
+  .badge-cyan  { @apply badge-teal; }
+  .badge-emerald { @apply badge-green; }
+  .badge-rose  { @apply badge-red; }
+  .badge-amber { @apply badge-yellow; }
+
+  /* ── Typography ── */
+  .section-title    { @apply text-2xl font-bold text-g-text; }
+  .section-subtitle { @apply text-g-text-2 mt-1 text-sm; }
+  .glow-text        { @apply bg-gradient-to-r from-g-blue-500 to-g-teal-500 bg-clip-text text-transparent; }
+
+  /* ── Progress bars ── */
+  .progress-bar-bg {
+    @apply w-full bg-g-border rounded-full h-2 overflow-hidden;
+  }
+
+  /* ── Skeleton loaders ── */
+  .skeleton {
+    background: linear-gradient(90deg, #F1F3F4 25%, #E8EAED 50%, #F1F3F4 75%);
+    background-size: 200% 100%;
+    animation: skeleton 1.5s ease-in-out infinite;
+    border-radius: 8px;
+  }
+
+  @keyframes skeleton {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  /* ── Page transition ── */
+  .page-enter {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* ── Waveform bars for Voice Input ───────────────────────── */
+.waveform-bar {
+  width: 3px;
+  border-radius: 2px;
+  transform-origin: bottom center;
+  background: #1A73E8;
+}
+.waveform-bar-1 { animation: wave 0.9s ease-in-out infinite; }
+.waveform-bar-2 { animation: wave 0.9s ease-in-out 0.1s infinite; }
+.waveform-bar-3 { animation: wave 0.9s ease-in-out 0.2s infinite; }
+.waveform-bar-4 { animation: wave 0.9s ease-in-out 0.3s infinite; }
+.waveform-bar-5 { animation: wave 0.9s ease-in-out 0.4s infinite; }
+.waveform-bar-6 { animation: wave 0.9s ease-in-out 0.5s infinite; }
+.waveform-bar-7 { animation: wave 0.9s ease-in-out 0.6s infinite; }
+
+@keyframes wave {
+  0%, 100% { transform: scaleY(0.3); }
+  50%       { transform: scaleY(1); }
+}
+
+/* ── Emotion badge pulse ──────────────────────────────────── */
+.emotion-badge-high {
+  animation: pulseSoft 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseSoft {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.7; }
+}
+
+/* ── Score ring animation ────────────────────────────────── */
+.score-ring-path {
+  stroke-dasharray: 251.2;
+  stroke-dashoffset: 251.2;
+  transition: stroke-dashoffset 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Webcam face mesh overlay ────────────────────────────── */
+.face-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 12px;
+}
+
+/* ── Google-style chip ────────────────────────────────────── */
+.chip {
+  @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium
+         bg-g-bg border border-g-border text-g-text-2 cursor-pointer
+         hover:border-g-blue-500 hover:text-g-blue-500 hover:bg-g-blue-50
+         transition-all duration-150 select-none;
+}
+.chip-active {
+  @apply bg-g-blue-50 border-g-blue-500 text-g-blue-500;
+}
+
+/* ── Google nav indicator ────────────────────────────────── */
+.nav-indicator {
+  position: absolute;
+  bottom: -1px;
+  height: 3px;
+  background: #1A73E8;
+  border-radius: 3px 3px 0 0;
+}
+
+/* ── Google I/O style animations ─────────────────────────── */
+
+/* Sketch underline — draws from left to right */
+@keyframes sketchUnderline {
+  from { width: 0; opacity: 0.4; }
+  to   { width: 100%; opacity: 1; }
+}
+
+/* Floating card — gentle bob */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+.animate-float-0 { animation: float 3s ease-in-out 0s infinite; }
+.animate-float-1 { animation: float 3s ease-in-out 0.2s infinite; }
+.animate-float-2 { animation: float 3s ease-in-out 0.4s infinite; }
+.animate-float-3 { animation: float 3s ease-in-out 0.6s infinite; }
+.animate-float-4 { animation: float 3s ease-in-out 0.8s infinite; }
+.animate-float-5 { animation: float 3s ease-in-out 1.0s infinite; }
+
+/* Staggered word reveal — Google Slides style */
+@keyframes wordReveal {
+  from { opacity: 0; transform: translateY(12px) rotate(-1deg); }
+  to   { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
+
+/* Gradient mesh shift — hero background */
+@keyframes meshShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Sketch circle draw — SVG stroke animation */
+@keyframes sketchDraw {
+  from { stroke-dashoffset: 1000; }
+  to   { stroke-dashoffset: 0; }
+}
+.animate-sketch-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: sketchDraw 2s ease forwards;
+}
+
+/* Typewriter cursor */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: #1A73E8;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+
+/* Count-up number style */
+.countup-number {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+/* ── Skeleton loader (camera permission waiting state) ─────── */
+@keyframes skeletonShimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #F1F3F4 25%, #E8EAED 50%, #F1F3F4 75%);
+  background-size: 800px 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+  border-radius: 8px;
+}
+
+/* ── Tabular nums for emotion scores ──────────────────────── */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+/* ── Camera canvas absolute overlay ──────────────────────── */
+.face-analysis-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
