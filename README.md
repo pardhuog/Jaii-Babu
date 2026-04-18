@@ -1,7 +1,7 @@
 # SkillBridge AI 🚀
 
 ## 🌐 Live Demo
-https://your-vercel-link.vercel.app
+https://jaii-babu-iy8n.vercel.app/
 
 ## 📌 Description
 SkillBridge AI is a web application that helps users with [briefly explain your project purpose].
